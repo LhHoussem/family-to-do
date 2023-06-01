@@ -1,0 +1,138 @@
+<div>
+  <h2 id="page-heading" data-cy="ToDoListHeading">
+    <span jhiTranslate="familyToDoApp.toDoList.home.title">To Do Lists</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="familyToDoApp.toDoList.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-to-do-list"
+        [routerLink]="['/to-do-list/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="familyToDoApp.toDoList.home.createLabel"> Create a new To Do List </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="toDoLists?.length === 0">
+    <span jhiTranslate="familyToDoApp.toDoList.home.notFound">No To Do Lists found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="toDoLists && toDoLists.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="familyToDoApp.toDoList.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="label">
+            <div class="d-flex">
+              <span jhiTranslate="familyToDoApp.toDoList.label">Label</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="familyToDoApp.toDoList.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="creationTimestamp">
+            <div class="d-flex">
+              <span jhiTranslate="familyToDoApp.toDoList.creationTimestamp">Creation Timestamp</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModificationTimestamp">
+            <div class="d-flex">
+              <span jhiTranslate="familyToDoApp.toDoList.lastModificationTimestamp">Last Modification Timestamp</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="owner.id">
+            <div class="d-flex">
+              <span jhiTranslate="familyToDoApp.toDoList.owner">Owner</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let toDoList of toDoLists; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/to-do-list', toDoList.id, 'view']">{{ toDoList.id }}</a>
+          </td>
+          <td>{{ toDoList.label }}</td>
+          <td jhiTranslate="{{ 'familyToDoApp.Status.' + toDoList.status }}">{{ toDoList.status }}</td>
+          <td>{{ toDoList.creationTimestamp | formatMediumDatetime }}</td>
+          <td>{{ toDoList.lastModificationTimestamp | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="toDoList.owner">
+              <a [routerLink]="['/profil', toDoList.owner.id, 'view']">{{ toDoList.owner.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/to-do-list', toDoList.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/to-do-list', toDoList.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(toDoList)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="toDoLists && toDoLists.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+{
+  "applications": "*",
+  "changelogDate": "20230601132809",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "to_do_list",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "label",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "IN_PROGRESS,OPENED,DONE"
+    },
+    {
+      "fieldName": "creationTimestamp",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModificationTimestamp",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "ToDoList entity.\\n@author Houssem.",
+  "jpaMetamodelFiltering": false,
+  "name": "ToDoList",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "profil",
+      "otherEntityRelationshipName": "affected",
+      "ownerSide": true,
+      "relationshipName": "affectedTo",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "profil",
+      "otherEntityRelationshipName": "toDoList",
+      "relationshipName": "owner",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "toDoList",
+      "relationshipName": "tasks",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

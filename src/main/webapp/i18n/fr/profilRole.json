@@ -1,0 +1,9 @@
+{
+  "familyToDoApp": {
+    "ProfilRole": {
+      "null": "",
+      "ACCOUNT_OWNER": "ACCOUNT_OWNER",
+      "MEMBER": "MEMBER"
+    }
+  }
+}
