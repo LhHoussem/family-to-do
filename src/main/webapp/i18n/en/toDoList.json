@@ -1,0 +1,30 @@
+{
+  "familyToDoApp": {
+    "toDoList": {
+      "home": {
+        "title": "To Do Lists",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new To Do List",
+        "createOrEditLabel": "Create or edit a To Do List",
+        "notFound": "No To Do Lists found"
+      },
+      "created": "A new To Do List is created with identifier {{ param }}",
+      "updated": "A To Do List is updated with identifier {{ param }}",
+      "deleted": "A To Do List is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete To Do List {{ id }}?"
+      },
+      "detail": {
+        "title": "To Do List"
+      },
+      "id": "Id",
+      "label": "Label",
+      "status": "Status",
+      "creationTimestamp": "Creation Timestamp",
+      "lastModificationTimestamp": "Last Modification Timestamp",
+      "affectedTo": "Affected To",
+      "owner": "Owner",
+      "tasks": "Tasks"
+    }
+  }
+}

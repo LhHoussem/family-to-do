@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20230601132501",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "profil",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imageUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "ProfilRole",
+      "fieldValues": "ACCOUNT_OWNER,MEMBER"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Profil entity.\\n@author Houssem.",
+  "jpaMetamodelFiltering": false,
+  "name": "Profil",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "toDoList",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "toDoList",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "toDoList",
+      "otherEntityRelationshipName": "affectedTo",
+      "ownerSide": false,
+      "relationshipName": "affected",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}
