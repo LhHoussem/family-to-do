@@ -3,7 +3,6 @@
  * @author Houssem.
  */
 entity ToDoList {
-	id String,
 	label String,
 	status Status,
     creationTimestamp Instant
@@ -39,7 +38,7 @@ enum ProfilRole {
 
 relationship ManyToMany {
 	ToDoList{affectedTo} to Profil{affected},
-    Task{toDos} to ToDoList{tasks} 
+    ToDoList{tasks} to Task
 }
 
 relationship OneToMany {
