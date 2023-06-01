@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-task-heading" data-cy="TaskCreateUpdateHeading" jhiTranslate="familyToDoApp.task.home.createOrEditLabel">
+        Create or edit a Task
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="familyToDoApp.task.isDone" for="field_isDone">Is Done</label>
+          <input type="checkbox" class="form-check" name="isDone" id="field_isDone" data-cy="isDone" formControlName="isDone" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="familyToDoApp.task.label" for="field_label">Label</label>
+          <input type="text" class="form-control" name="label" id="field_label" data-cy="label" formControlName="label" />
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="familyToDoApp.task.toDos" for="field_toDos">To Dos</label>
+          <select
+            class="form-control"
+            id="field_toDos"
+            data-cy="toDos"
+            multiple
+            name="toDos"
+            formControlName="toDos"
+            [compareWith]="compareToDoList"
+          >
+            <option [ngValue]="toDoListOption" *ngFor="let toDoListOption of toDoListsSharedCollection">{{ toDoListOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

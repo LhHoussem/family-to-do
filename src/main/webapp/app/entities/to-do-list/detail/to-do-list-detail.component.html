@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="toDoList">
+      <h2 data-cy="toDoListDetailsHeading"><span jhiTranslate="familyToDoApp.toDoList.detail.title">To Do List</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="familyToDoApp.toDoList.id">Id</span></dt>
+        <dd>
+          <span>{{ toDoList.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="familyToDoApp.toDoList.label">Label</span></dt>
+        <dd>
+          <span>{{ toDoList.label }}</span>
+        </dd>
+        <dt><span jhiTranslate="familyToDoApp.toDoList.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'familyToDoApp.Status.' + toDoList.status }}">{{ toDoList.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="familyToDoApp.toDoList.creationTimestamp">Creation Timestamp</span></dt>
+        <dd>
+          <span>{{ toDoList.creationTimestamp | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="familyToDoApp.toDoList.lastModificationTimestamp">Last Modification Timestamp</span></dt>
+        <dd>
+          <span>{{ toDoList.lastModificationTimestamp | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="familyToDoApp.toDoList.affectedTo">Affected To</span></dt>
+        <dd>
+          <span *ngFor="let affectedTo of toDoList.affectedTos; let last = last">
+            <a [routerLink]="['/profil', affectedTo.id, 'view']">{{ affectedTo.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="familyToDoApp.toDoList.owner">Owner</span></dt>
+        <dd>
+          <div *ngIf="toDoList.owner">
+            <a [routerLink]="['/profil', toDoList.owner.id, 'view']">{{ toDoList.owner.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/to-do-list', toDoList.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
