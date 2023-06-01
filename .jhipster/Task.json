@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20230601134751",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "task",
+  "fields": [
+    {
+      "fieldName": "isDone",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "label",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Task entity.\\n@author Houssem.",
+  "jpaMetamodelFiltering": false,
+  "name": "Task",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "toDoList",
+      "otherEntityRelationshipName": "tasks",
+      "ownerSide": true,
+      "relationshipName": "toDos",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

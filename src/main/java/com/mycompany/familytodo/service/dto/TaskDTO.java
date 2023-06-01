@@ -1,0 +1,87 @@
+package com.mycompany.familytodo.service.dto;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * A DTO for the {@link com.mycompany.familytodo.domain.Task} entity.
+ */
+@Schema(description = "Task entity.\n@author Houssem.")
+@SuppressWarnings("common-java:DuplicatedBlocks")
+public class TaskDTO implements Serializable {
+
+    private String id;
+
+    private Boolean isDone;
+
+    private String label;
+
+    private Set<ToDoListDTO> toDos = new HashSet<>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(Boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public Set<ToDoListDTO> getToDos() {
+        return toDos;
+    }
+
+    public void setToDos(Set<ToDoListDTO> toDos) {
+        this.toDos = toDos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TaskDTO)) {
+            return false;
+        }
+
+        TaskDTO taskDTO = (TaskDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, taskDTO.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id);
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "TaskDTO{" +
+            "id='" + getId() + "'" +
+            ", isDone='" + getIsDone() + "'" +
+            ", label='" + getLabel() + "'" +
+            ", toDos=" + getToDos() +
+            "}";
+    }
+}
