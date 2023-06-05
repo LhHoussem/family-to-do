@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * An authority (a security role) used by Spring Security.
  */
-@Document(collection = "jhi_authority")
+@Document(collection = "authority")
 public class Authority implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/config/error.constants';
 import { RegisterService } from './register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-register',
@@ -44,12 +45,20 @@ export class RegisterComponent implements AfterViewInit {
     }),
   });
 
-  constructor(private translateService: TranslateService, private registerService: RegisterService) {}
+  constructor(private translateService: TranslateService, private registerService: RegisterService, private router: Router) {}
 
   ngAfterViewInit(): void {
     if (this.login) {
       this.login.nativeElement.focus();
     }
+  }
+
+  toSignIn(): void {
+    this.router.navigate(['/login']);
+  }
+
+  toHome(): void {
+    this.router.navigate(['/']);
   }
 
   register(): void {

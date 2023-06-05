@@ -5,6 +5,8 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import dayjs from 'dayjs/esm';
 
 import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'jhi-main',
@@ -12,6 +14,9 @@ import { AccountService } from 'app/core/auth/account.service';
 })
 export class MainComponent implements OnInit {
   private renderer: Renderer2;
+  isAuthenticated: boolean = false;
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private accountService: AccountService,
@@ -26,6 +31,13 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     // try to log in automatically
     this.accountService.identity().subscribe();
+
+    this.accountService
+      .getAuthenticationState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(account => {
+        this.isAuthenticated = account != null;
+      });
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

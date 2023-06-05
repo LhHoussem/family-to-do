@@ -31,7 +31,6 @@ type NewToDoListFormRawValue = FormValueOf<NewToDoList>;
 type ToDoListFormDefaults = Pick<NewToDoList, 'id' | 'creationTimestamp' | 'lastModificationTimestamp' | 'affectedTos' | 'tasks'>;
 
 type ToDoListFormGroupContent = {
-  id: FormControl<ToDoListFormRawValue['id'] | NewToDoList['id']>;
   label: FormControl<ToDoListFormRawValue['label']>;
   status: FormControl<ToDoListFormRawValue['status']>;
   creationTimestamp: FormControl<ToDoListFormRawValue['creationTimestamp']>;
@@ -51,13 +50,6 @@ export class ToDoListFormService {
       ...toDoList,
     });
     return new FormGroup<ToDoListFormGroupContent>({
-      id: new FormControl(
-        { value: toDoListRawValue.id, disabled: toDoListRawValue.id !== null },
-        {
-          nonNullable: true,
-          validators: [Validators.required],
-        }
-      ),
       label: new FormControl(toDoListRawValue.label),
       status: new FormControl(toDoListRawValue.status),
       creationTimestamp: new FormControl(toDoListRawValue.creationTimestamp),
