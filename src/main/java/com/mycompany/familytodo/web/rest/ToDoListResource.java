@@ -82,12 +82,6 @@ public class ToDoListResource {
         @RequestBody ToDoListDTO toDoListDTO
     ) throws URISyntaxException {
         log.debug("REST request to update ToDoList : {}, {}", id, toDoListDTO);
-        if (toDoListDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, toDoListDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
 
         if (!toDoListRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
@@ -117,16 +111,6 @@ public class ToDoListResource {
         @RequestBody ToDoListDTO toDoListDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update ToDoList partially : {}, {}", id, toDoListDTO);
-        if (toDoListDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, toDoListDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!toDoListRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
 
         Optional<ToDoListDTO> result = toDoListService.partialUpdate(toDoListDTO);
 

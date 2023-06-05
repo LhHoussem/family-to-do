@@ -41,7 +41,7 @@ public class ToDoListServiceImpl implements ToDoListService {
     public ToDoListDTO update(ToDoListDTO toDoListDTO) {
         log.debug("Request to update ToDoList : {}", toDoListDTO);
         ToDoList toDoList = toDoListMapper.toEntity(toDoListDTO);
-        toDoList.setIsPersisted();
+        //        toDoList.setIsPersisted();
         toDoList = toDoListRepository.save(toDoList);
         return toDoListMapper.toDto(toDoList);
     }

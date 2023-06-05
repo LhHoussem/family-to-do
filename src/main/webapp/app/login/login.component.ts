@@ -36,6 +36,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.username.nativeElement.focus();
   }
 
+  toSignUp(): void {
+    this.router.navigate(['/account/register']);
+  }
+
+  toHome(): void {
+    this.router.navigate(['/']);
+  }
+
   login(): void {
     this.loginService.login(this.loginForm.getRawValue()).subscribe({
       next: () => {
